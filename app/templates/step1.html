@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em;
+      }
+      img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" onclick="location.href='/'">Button Left</button>
+    <img
+      src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+      alt="Image"
+      class="center"
+    />
+    <button type="button" onclick="location.href='/step2'">Button Right</button>
+  </body>
+</html>

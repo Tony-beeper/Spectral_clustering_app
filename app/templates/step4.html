@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Step 4</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em;
+      }
+      .eigenvectors-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .eigenvectors-list {
+        width: 45%;
+      }
+      img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" onclick="location.href='/'">Button Left</button>
+    <div>
+      <form action="/step4" method="post">
+        <label for="clusters">Number of clusters:</label><br />
+        <input type="text" id="clusters" name="clusters" /><br />
+        <label for="sample_size">Sample size:</label><br />
+        <input type="text" id="sample_size" name="sample_size" /><br />
+        <input type="submit" value="Submit" />
+      </form>
+
+      <h3>k largest Eigenvalues:</h3>
+      <p>{{ eigenvalues }}</p>
+
+      <div class="eigenvectors-container">
+        <div class="eigenvectors-list">
+          <h3>k largest Eigenvectors:</h3>
+          {% for eigenvector in eigenvectors %}
+          <p>{{ eigenvector }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="eigenvectors-list">
+          <h3>Normalized Eigenvectors:</h3>
+          {% for y in Y_normalized %}
+          <p>{{ y }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <button type="button" onclick="location.href='/step6'">Button Right</button>
+  </body>
+</html>

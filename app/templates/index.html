@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Clustering App</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Clustering App</h1>
+      <!-- Your content goes here -->
+      <h2>Spectral Clustering</h2>
+      <form action="/step1" method="post">
+        Sample size: <input type="number" name="sample_size" /><br />
+        Number of clusters: <input type="number" name="clusters" /><br />
+        Noise: <input type="number" name="noise" /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

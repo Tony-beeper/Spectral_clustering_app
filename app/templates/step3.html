@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Step 3</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+      }
+      img {
+        width: 45%;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" onclick="location.href='/'">Button Left</button>
+    <div class="container">
+      <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
+      <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
+    </div>
+    <button type="button" onclick="location.href='/step4'">Button Right</button>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Step 6</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em;
+      }
+      img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="location.href='/'" type="button">Home</button>
+    <img
+      src="{{ url_for('plot_step6') }}"
+      alt="Image"
+      class="center"
+    />
+    <button onclick="location.href='/'" type="button">Finished</button>
+  </body>
+</html>
