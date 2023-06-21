@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request
 
+from scipy.linalg import eigh
 from sklearn.datasets import make_moons
 from sklearn.cluster import SpectralClustering
 import io
@@ -196,6 +197,8 @@ def step4():
     sample_size = session.get('sample_size')
     noise = session.get('noise')
     X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
+
+
     kernel = RBF(length_scale=length_scale)
     affinity_matrix = kernel(X)
 
@@ -204,30 +207,49 @@ def step4():
     D_powered = np.sqrt(D_inverse)
     L = np.matmul(D_powered, affinity_matrix)
     L = np.matmul(L, D_powered)
-    eigenvalues, eigenvectors = np.linalg.eig(L)
-    indices = np.argsort(eigenvalues)[-num_clusters:]
-    # Select the largest k eigenvalues and corresponding eigenvectors
-    eigenvalues = eigenvalues[indices]
-    eigenvectors = eigenvectors[:, indices]
 
-    eigenvectors = eigenvectors.round(decimals=3)
-    eigenvalues = eigenvalues.round(decimals=2)
-    Y_normalized = normalize(eigenvectors, axis=1, norm='l2')
-    return render_template('step4.html', eigenvalues=eigenvalues, eigenvectors=eigenvectors,
+    eigenvalues, eigenvectors = eigh(L)
+
+    Y = eigenvectors[:, :num_clusters]
+    # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
+    sort_indices = np.argsort(eigenvalues)
+    # descending order
+    sort_indices = sort_indices[::-1]
+    # use these indices to sort the eigenvectors from scipy.linalg.eigh
+    sorted_eigenvalues = eigenvalues[sort_indices]
+    sorted_eigenvalues = sorted_eigenvalues[:num_clusters]
+    sorted_eigenvectors = eigenvectors[:, sort_indices]
+    sorted_eigenvectors = sorted_eigenvectors[:num_clusters]
+    
+    # select the first 'num_clusters' columns from the sorted eigenvectors
+    Y = sorted_eigenvectors[:, :num_clusters]
+
+    Y_normalized = normalize(Y, axis=1, norm='l2')
+
+    return render_template('step4.html', eigenvalues=sorted_eigenvalues, eigenvectors=sorted_eigenvectors,
                            Y_normalized=Y_normalized)
 
 
-@app.route('/step6')
-def step6():
-    return render_template('step6.html')
+@app.route('/step5')
+def step5():
+    return render_template('step5.html')
 
 
-@app.route('/plot_step6')
-def plot_step6():
-    num_clusters = session.get('num_clusters')
-    sample_size = session.get('sample_size')
-    noise = session.get('noise')
+@app.route('/plot_step5')
+def plot_step5():
+
+    # num_clusters = session.get('num_clusters')
+
+    # sample_size = session.get('sample_size')
+
+    # noise = session.get('noise')
+    num_clusters = 2
+    sample_size = 50
+    noise = 0
+
     X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
+
+
     kernel = RBF(length_scale=length_scale)
     affinity_matrix = kernel(X)
 
@@ -237,21 +259,34 @@ def plot_step6():
     L = np.matmul(D_powered, affinity_matrix)
     L = np.matmul(L, D_powered)
 
-    eigenvalues, eigenvectors = np.linalg.eig(L)
+    eigenvalues, eigenvectors = eigh(L)
+
     Y = eigenvectors[:, :num_clusters]
+    # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
+    sort_indices = np.argsort(eigenvalues)
+    # descending order
+    sort_indices = sort_indices[::-1]
+    # use these indices to sort the eigenvectors from scipy.linalg.eigh
+    sorted_eigenvectors = eigenvectors[:, sort_indices]
+    
+    # select the first 'num_clusters' columns from the sorted eigenvectors
+    Y = sorted_eigenvectors[:, :num_clusters]
+
     Y_normalized = normalize(Y, axis=1, norm='l2')
-    print(Y_normalized)
+
     kmeans = KMeans(n_clusters=num_clusters, max_iter=1000)
     kmeans.fit(Y_normalized)
 
     labels = kmeans.labels_
+
+
     fig = Figure(figsize=(10, 10))
     axs = fig.add_subplot(1, 1, 1)
     scatter = axs.scatter(X[:, 0], X[:, 1], c=labels)
 
     for i, coord in enumerate(X):
         coord_int = coord.astype(int)
-        axs.annotate(f'Point {i}: {coord_int[0]}, {coord_int[1]}',
+        axs.annotate(f'{i}',
                      (coord[0], coord[1]),
                      textcoords="offset points",
                      xytext=(-10, -10),
