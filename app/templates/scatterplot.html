@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8" />
+  <title>Make moon example</title>
+
+  <style>
+    h1 {
+      font-family: "Roboto", sans-serif;
+      font-weight: bold;
+      font-size: 25px;
+    }
+
+    p {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-size: 17px;
+      line-height: 23px;
+    }
+
+    .eight {
+      color: #e6194b;
+      font-weight: bold;
+    }
+
+    .six {
+      color: #3cb44b;
+      font-weight: bold;
+    }
+
+    .four {
+      color: #ffe119;
+      font-weight: bold;
+    }
+
+    .five {
+      color: #4363d8;
+      font-weight: bold;
+    }
+
+    .three {
+      color: #911eb4;
+      font-weight: bold;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+      line-height: 8px;
+      width: 990px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #404040;
+      shape-rendering: crispEdges;
+    }
+
+    .dot {
+      opacity: 0.5;
+    }
+
+    .container {
+      width: 500px;
+      float: left;
+      margin: 50px 0 0 0;
+    }
+
+    .div2 {
+      width: 280px;
+      float: right;
+      margin: 200px 0 0 50px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1>Make moon Scatterplot</h1>
+      <!-- The CSV URL is now provided by the Flask route '/serve_csv/sample_size/noise' -->
+      <script>
+        var csvUrl =
+          "http://127.0.0.1:5000{{ url_for('serve_csv', sample_size=20, noise=0) }}";
+      </script>
+      <div id="my_dataviz2"></div>
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="{{ url_for('static', filename='Scatter.js') }}"></script>
+    </div>
+  </body>
+</html>

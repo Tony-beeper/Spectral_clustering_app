@@ -19,6 +19,29 @@ base_plot_sample_size = 20
 mask_scale = 250
 
 
+@app.route('/scatterplot')
+def scatterplot():
+    return render_template('scatterplot.html')
+
+@app.route('/serve_csv/<int:sample_size>/<float:noise>', methods=['GET'])
+def serve_csv(sample_size, noise):
+    X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
+    df = pd.DataFrame(data=X, columns=["X", "Y"])
+    df['point_number'] = df.index
+    df.to_csv('moons.csv', index=False)
+    return send_file('moons.csv', mimetype='text/csv', as_attachment=True, download_name='moons.csv')
+
+
+@app.route('/data', methods=['GET'])
+def get_data():
+    # create scatter plot data using sklearn's make_moons function
+    X, _ = make_moons(n_samples=100, noise=0.1)
+    df = pd.DataFrame(data=X, columns=['x', 'y'])
+
+    # return json
+    return jsonify(df.to_dict(orient='records'))
+
+
 def set_mask_scale(sample_size):
     if sample_size > 0 and sample_size <=24:
         return 250
