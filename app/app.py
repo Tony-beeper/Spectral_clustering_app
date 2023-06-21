@@ -1,31 +1,22 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, send_file, session,jsonify
 
 from scipy.linalg import eigh
-from sklearn.datasets import make_moons
-from sklearn.cluster import SpectralClustering
-import io
-import base64
-import urllib
 import numpy as np
 import seaborn as sns
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
-from sklearn.metrics.pairwise import rbf_kernel
 from sklearn.preprocessing import normalize
 from sklearn.cluster import KMeans
 from sklearn.gaussian_process.kernels import RBF
 import io
-from flask import send_file
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-from flask import Flask, session
 
-length_scale = 0.1
 app = Flask(__name__)
+length_scale = 0.1
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Be sure to set a secret key
 base_plot_sample_size = 20
-mask_scale =250
+mask_scale = 250
 
 
 def set_mask_scale(sample_size):
