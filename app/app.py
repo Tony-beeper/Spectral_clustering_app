@@ -1,8 +1,7 @@
-from flask import Flask, render_template, Response, request, send_file, session,jsonify
+from flask import Flask, render_template, Response, request, session
 
 from scipy.linalg import eigh
 import numpy as np
-import seaborn as sns
 import pandas as pd
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import normalize
@@ -27,19 +26,16 @@ def set_mask_scale(sample_size):
     else:
         return 1
     
-# sample_size = session.get('sample_size')
-# num_clusters = session.get('num_clusters')
-
 
 @app.route('/plot_step1/<int:sample_size>/<int:num_clusters>/<float:noise>')
 def plot_step1(sample_size, num_clusters, noise):
 
     X, y = make_moons(n_samples=sample_size, noise=noise, random_state=0)
-    fig = Figure()
-    axis = fig.add_subplot(1, 1, 1)
+    fig = Figure(facecolor='grey')
+    axis = fig.add_subplot(1, 1, 1, facecolor='#d3d3d3')
     xs, ys = zip(*X)
     axis.scatter(xs, ys)
-    axis.set_title('Sample Data')
+    axis.set_title('Make Moons Data Graph')
     for i, (x, y) in enumerate(X):
         axis.text(x, y, str(i), fontsize=12)
 
@@ -48,15 +44,22 @@ def plot_step1(sample_size, num_clusters, noise):
     return Response(output.getvalue(), mimetype='image/png')
 
 
-@app.route('/step1', methods=['POST'])
+@app.route('/step1', methods=['POST', 'GET'])
 def image():
-    num_clusters = int(request.form['clusters'])
-    sample_size = int(request.form['sample_size'])
-    noise = float(request.form['noise'])
-    session['sample_size'] = sample_size
-    session['num_clusters'] = num_clusters
-    session['noise'] = noise
-    return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
+    if(request.method == 'POST'):
+        num_clusters = int(request.form['clusters'])
+        sample_size = int(request.form['sample_size'])
+        noise = float(request.form['noise'])
+        session['sample_size'] = sample_size
+        session['num_clusters'] = num_clusters
+        session['noise'] = noise
+        return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
+    else:
+        num_clusters = session.get('num_clusters')
+        sample_size = session.get('sample_size')
+        noise = session.get('noise')
+        return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
+
 
 
 @app.route('/plot_step2')
@@ -78,7 +81,7 @@ def plot_step2():
 
     matrix_plot_size_scale = (sample_size) / base_plot_sample_size
     fig = Figure(figsize=(12*matrix_plot_size_scale,
-                 9*matrix_plot_size_scale))
+                 9*matrix_plot_size_scale), facecolor='grey')
     axs = fig.add_subplot(1, 1, 1)
 
     # Set ticks to have interval of 1
@@ -126,7 +129,7 @@ def plot_step3_1():
     # Increase DPI for a more detailed image
     matrix_plot_size_scale = (sample_size) / base_plot_sample_size
     fig = Figure(figsize=(12*matrix_plot_size_scale,
-                 9*matrix_plot_size_scale), dpi=200)
+                 9*matrix_plot_size_scale), dpi=200, facecolor='grey')
     axs = fig.add_subplot(1, 1, 1)
     # Set ticks to have interval of 1
     axs.set_xticks(np.arange(0, D.shape[0], 1))
@@ -169,7 +172,7 @@ def plot_step3_2():
     # Increase DPI for a more detailed image
     matrix_plot_size_scale = (sample_size) / base_plot_sample_size
     fig = Figure(figsize=(12*matrix_plot_size_scale,
-                 9*matrix_plot_size_scale), dpi=200)
+                 9*matrix_plot_size_scale), dpi=200, facecolor='grey')
     axs = fig.add_subplot(1, 1, 1)
 
     # Set ticks to have interval of 1
@@ -213,10 +216,7 @@ def step4():
     L = np.matmul(L, D_powered)
 
     eigenvalues, eigenvectors = eigh(L)
-    print("eigenvalues")
-    print(eigenvalues)
-    print("eigenvectors")
-    print(eigenvectors)
+
     # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
     sort_indices = np.argsort(eigenvalues)
     # descending order
@@ -231,13 +231,13 @@ def step4():
     Y = sorted_eigenvectors[:, :num_clusters]
 
     Y_normalized = normalize(Y, axis=1, norm='l2')
-    # print("Y")
-    # print(Y)
-    # print("Y_normalized")
-    # print(Y_normalized)
-    # print("sorted_eigenvalues")
-    # print(sorted_eigenvectors)
-    return render_template('step4.html', eigenvalues=sorted_eigenvalues, eigenvectors=sorted_eigenvectors[:, :num_clusters],
+    # Convert the NumPy arrays to lists of lists for Jinja2
+    sorted_eigenvalues = sorted_eigenvalues.tolist()
+    sorted_eigenvectors = [list(vec) for vec in sorted_eigenvectors[:, :num_clusters].T]
+    Y_normalized = Y_normalized.T # Transpose Y_normalized before converting to list of lists
+    Y_normalized = [list(vec) for vec in Y_normalized]
+
+    return render_template('step4.html', eigenvalues=sorted_eigenvalues, eigenvectors=sorted_eigenvectors,
                            Y_normalized=Y_normalized)
 
 
@@ -289,8 +289,8 @@ def plot_step5():
     labels = kmeans.labels_
 
 
-    fig = Figure(figsize=(10, 10))
-    axs = fig.add_subplot(1, 1, 1)
+    fig = Figure(figsize=(10, 10), facecolor='grey')
+    axs = fig.add_subplot(1, 1, 1,facecolor='#d3d3d3')
     axs.scatter(X[:, 0], X[:, 1], c=labels)
     axs.set_title('Clustered Graph')
     for i, coord in enumerate(X):
