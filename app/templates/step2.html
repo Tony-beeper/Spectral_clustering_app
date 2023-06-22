@@ -2,24 +2,32 @@
 <html>
   <head>
     <title>Image</title>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em;
-      }
-      img.center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step2.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/buttons.css') }}"
+    />
   </head>
   <body>
-    <button type="button" onclick="location.href='/'">Button Left</button>
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step1'"
+    >
+      <
+    </button>
     <img src="{{ url_for('plot_step2') }}" alt="Image" class="center" />
-    <button type="button" onclick="location.href='/step3'">Button Right</button>
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step3'"
+    >
+      >
+    </button>
   </body>
 </html>

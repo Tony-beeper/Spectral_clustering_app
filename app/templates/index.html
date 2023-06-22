@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -11,19 +10,87 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/buttons.css') }}"
+    />
+
+    <style>
+      body {
+        background-color: #2b2b2b;
+        color: #fff;
+      }
+      .card {
+        background-color: #3c3c3c;
+      }
+      .form-control {
+        background-color: #5a5a5a;
+        color: #fff;
+        border: none;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+    </style>
+
     <title>Clustering App</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Clustering App</h1>
-      <!-- Your content goes here -->
-      <h2>Spectral Clustering</h2>
-      <form action="/step1" method="post">
-        Sample size: <input type="number" name="sample_size" /><br />
-        Number of clusters: <input type="number" name="clusters" /><br />
-        Noise: <input type="number" name="noise" /><br />
-        <input type="submit" value="Submit" />
-      </form>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+              <h1>Clustering App</h1>
+            </div>
+            <div class="card-body">
+              <h2 class="text-center">Spectral Clustering</h2>
+              <form action="/step1" method="post" class="py-4">
+                <div class="form-group">
+                  <label for="sample_size">Sample size:</label>
+                  <input
+                    type="number"
+                    id="sample_size"
+                    name="sample_size"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="clusters">Number of clusters:</label>
+                  <input
+                    type="number"
+                    id="clusters"
+                    name="clusters"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="noise">Noise:</label>
+                  <input
+                    type="number"
+                    id="noise"
+                    name="noise"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group text-center">
+                  <input type="submit" value="Submit" class="btn-submit" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

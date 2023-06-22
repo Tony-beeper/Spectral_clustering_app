@@ -2,50 +2,74 @@
 <html>
   <head>
     <title>Step 4</title>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em;
-      }
-      .eigenvectors-container {
-        display: flex;
-        justify-content: space-between;
-      }
-      .eigenvectors-list {
-        width: 45%;
-      }
-      img.center {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step4.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/buttons.css') }}"
+    />
   </head>
   <body>
-    <button type="button" onclick="location.href='/'">Button Left</button>
-    <div>
-      <h3>k largest Eigenvalues:</h3>
-      <p>{{ eigenvalues }}</p>
-
-      <div class="eigenvectors-container">
-        <div class="eigenvectors-list">
-          <h3>k largest Eigenvectors:</h3>
-          {% for eigenvector in eigenvectors %}
-          <p>{{ eigenvector }}</p>
-          {% endfor %}
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      id="prev-btn"
+      onclick="location.href='/step3'"
+    >
+      <
+    </button>
+    <div class="mega-container">
+      <div>
+        <div class="container my-4">
+          <h3 class="text-center my-3">k largest Eigenvalues:</h3>
+          <div class="row">
+            {% for eigenvalue in eigenvalues %}
+            <div class="col-md-4">
+              <div class="eigenvalue-box p-3 my-2">
+                <p class="mb-0">{{ eigenvalue }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="container my-4">
+          <h3 class="text-center my-3">k largest Eigenvectors:</h3>
+          <div class="eigenvectors-container">
+            {% for eigenvector in eigenvectors %}
+            <div class="eigenvector-box p-3 my-2">
+              {% for element in eigenvector %}
+              <p class="mb-0">{{ element }}</p>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
         </div>
 
-        <div class="eigenvectors-list">
-          <h3>Normalized Eigenvectors:</h3>
-          {% for y in Y_normalized %}
-          <p>{{ y }}</p>
-          {% endfor %}
+        <div class="container my-4">
+          <h3 class="text-center my-3">Normalized Eigenvectors:</h3>
+          <div class="eigenvectors-container">
+            {% for y in Y_normalized %}
+            <div class="eigenvector-box p-3 my-2">
+              {% for element in y %}
+              <p class="mb-0">{{ element }}</p>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-    <button type="button" onclick="location.href='/step5'">Button Right</button>
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      id="next-btn"
+      onclick="location.href='/step5'"
+    >
+      >
+    </button>
   </body>
 </html>

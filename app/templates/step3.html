@@ -2,30 +2,35 @@
 <html>
   <head>
     <title>Step 3</title>
-    <style>
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em;
-      }
-      .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1em;
-      }
-      img {
-        width: 45%;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step3.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/buttons.css') }}"
+    />
   </head>
   <body>
-    <button type="button" onclick="location.href='/'">Button Left</button>
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step2'"
+    >
+      <
+    </button>
     <div class="container">
       <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
       <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
     </div>
-    <button type="button" onclick="location.href='/step4'">Button Right</button>
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step4'"
+    >
+      >
+    </button>
   </body>
 </html>

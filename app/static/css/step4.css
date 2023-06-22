@@ -1,0 +1,71 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0em;
+  background-color: #2b2b2b;
+  color: #fff;
+  position: relative;
+}
+#next-btn {
+  position: absolute;
+  right: 10px;
+  top: 300px;
+}
+#prev-btn {
+  position: absolute;
+  left: 10px;
+  top: 300px;
+}
+
+.mega-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Adjusts container's items to the center */
+  align-items: center;
+  flex-direction: column; /* Stacks .eigenvectors-container(s) vertically */
+  width: 100%;
+}
+
+.eigenvectors-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.eigenvector-box {
+  background-color: #3c3c3c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.eigenvalue-box {
+  background-color: #3c3c3c;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+.eigenvalue-box,
+.eigenvalue-box p,
+.eigenvector-box p {
+  margin-bottom: 0.5rem;
+}
