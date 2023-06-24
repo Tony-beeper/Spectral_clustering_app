@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Image</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -13,12 +14,37 @@
     />
   </head>
   <body>
-    <button class="next-and-pre-btn" onclick="location.href='/'" type="button">
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step4'"
+    >
       <
     </button>
-    <img src="{{ url_for('plot_step5') }}" alt="Image" class="center" />
-    <button class="next-and-pre-btn" onclick="location.href='/'" type="button">
-      Home Page
+    <!-- <div class="container"> -->
+    <!-- <div>  -->
+    <img
+      src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+      alt="Image"
+      class="center"
+    />
+    <!-- </div> -->
+    <div>
+      <h2>Label for each point:</h2>
+      <div>
+        {% for label in labels %}
+        <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- </div> -->
+
+    <button
+      type="button"
+      class="next-and-pre-btn"
+      onclick="location.href='/step6'"
+    >
+      >
     </button>
   </body>
 </html>

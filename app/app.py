@@ -240,14 +240,55 @@ def step4():
     return render_template('step4.html', eigenvalues=sorted_eigenvalues, eigenvectors=sorted_eigenvectors,
                            Y_normalized=Y_normalized)
 
-
 @app.route('/step5')
 def step5():
-    return render_template('step5.html')
+    num_clusters = session.get('num_clusters')
+    sample_size = session.get('sample_size')
+    noise = session.get('noise')
 
 
-@app.route('/plot_step5')
-def plot_step5():
+    X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
+
+
+    kernel = RBF(length_scale=length_scale)
+    affinity_matrix = kernel(X)
+
+    D = np.diag(np.round(np.sum(affinity_matrix, axis=1), 2))
+    D_inverse = np.linalg.inv(D)
+    D_powered = np.sqrt(D_inverse)
+    L = np.matmul(D_powered, affinity_matrix)
+    L = np.matmul(L, D_powered)
+
+    eigenvalues, eigenvectors = eigh(L)
+
+    Y = eigenvectors[:, :num_clusters]
+    # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
+    sort_indices = np.argsort(eigenvalues)
+    # descending order
+    sort_indices = sort_indices[::-1]
+    # use these indices to sort the eigenvectors from scipy.linalg.eigh
+    sorted_eigenvectors = eigenvectors[:, sort_indices]
+    
+    # select the first 'num_clusters' columns from the sorted eigenvectors
+    Y = sorted_eigenvectors[:, :num_clusters]
+
+    Y_normalized = normalize(Y, axis=1, norm='l2')
+
+    kmeans = KMeans(n_clusters=num_clusters, max_iter=1000)
+    kmeans.fit(Y_normalized)
+
+    labels = kmeans.labels_
+
+    return render_template('step5.html', labels=labels, sample_size=sample_size, noise=noise, num_clusters=num_clusters)
+
+
+@app.route('/step6')
+def step6():
+    return render_template('step6.html')
+
+
+@app.route('/plot_step6')
+def plot_step6():
 
     num_clusters = session.get('num_clusters')
 
