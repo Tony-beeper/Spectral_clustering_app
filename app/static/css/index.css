@@ -21,3 +21,16 @@ body {
   background-color: #007bff;
   border-color: #007bff;
 }
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #5a5a5a;
+  border-color: #5a5a5a;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-color: #5a5a5a;
+}
+
+.custom-checkbox .custom-control-label::after {
+  color: #fff;
+}

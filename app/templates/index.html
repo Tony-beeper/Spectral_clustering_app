@@ -33,7 +33,7 @@
             </div>
             <div class="card-body">
               <h2 class="text-center">Spectral Clustering</h2>
-              <form action="/step1" method="post" class="py-4">
+              <form action="/index" method="post" class="py-4">
                 <div class="form-group">
                   <label for="sample_size">Sample size:</label>
                   <input
@@ -41,6 +41,7 @@
                     id="sample_size"
                     name="sample_size"
                     class="form-control"
+                    min="1"
                     required
                   />
                 </div>
@@ -51,18 +52,34 @@
                     id="clusters"
                     name="clusters"
                     class="form-control"
+                    min="1"
                     required
                   />
                 </div>
                 <div class="form-group">
                   <label for="noise">Noise:</label>
                   <input
-                    type="float"
+                    type="number"
                     id="noise"
                     name="noise"
                     class="form-control"
+                    min="0"
+                    step="any"
                     required
                   />
+                </div>
+                <div
+                  class="form-group custom-control custom-checkbox text-center"
+                >
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="displayCheck"
+                    name="display_mode"
+                  />
+                  <label class="custom-control-label" for="displayCheck"
+                    >Check for step-by-step display</label
+                  >
                 </div>
                 <div class="form-group text-center">
                   <input type="submit" value="Submit" class="btn-submit" />

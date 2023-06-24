@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request, session
+from flask import Flask, render_template, Response, request, session, redirect, url_for
 
 from scipy.linalg import eigh
 import numpy as np
@@ -25,6 +25,23 @@ def set_mask_scale(sample_size):
         return 5
     else:
         return 1
+
+
+@app.route('/index', methods=['POST'])
+def index():
+    num_clusters = int(request.form['clusters'])
+    sample_size = int(request.form['sample_size'])
+    display_mode = request.form.get('display_mode')  # 'on' if checked, None if not checked
+    noise = float(request.form['noise'])
+    session['sample_size'] = sample_size
+    session['num_clusters'] = num_clusters
+    session['noise'] = noise
+    session['display_mode'] = display_mode
+    if display_mode == 'on':
+        return redirect(url_for('step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise))
+    else:
+        return redirect(url_for('all_steps'))
+
     
 
 @app.route('/plot_step1/<int:sample_size>/<int:num_clusters>/<float:noise>')
@@ -45,20 +62,11 @@ def plot_step1(sample_size, num_clusters, noise):
 
 
 @app.route('/step1', methods=['POST', 'GET'])
-def image():
-    if(request.method == 'POST'):
-        num_clusters = int(request.form['clusters'])
-        sample_size = int(request.form['sample_size'])
-        noise = float(request.form['noise'])
-        session['sample_size'] = sample_size
-        session['num_clusters'] = num_clusters
-        session['noise'] = noise
-        return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
-    else:
-        num_clusters = session.get('num_clusters')
-        sample_size = session.get('sample_size')
-        noise = session.get('noise')
-        return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
+def step1():
+    num_clusters = session.get('num_clusters')
+    sample_size = session.get('sample_size')
+    noise = session.get('noise')
+    return render_template('step1.html', num_clusters=num_clusters, sample_size=sample_size, noise=noise)
 
 
 
@@ -205,7 +213,6 @@ def step4():
     noise = session.get('noise')
     X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
 
-
     kernel = RBF(length_scale=length_scale)
     affinity_matrix = kernel(X)
 
@@ -261,12 +268,13 @@ def step5():
 
     eigenvalues, eigenvectors = eigh(L)
 
-    Y = eigenvectors[:, :num_clusters]
     # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
     sort_indices = np.argsort(eigenvalues)
     # descending order
     sort_indices = sort_indices[::-1]
     # use these indices to sort the eigenvectors from scipy.linalg.eigh
+    sorted_eigenvalues = eigenvalues[sort_indices]
+    sorted_eigenvalues = sorted_eigenvalues[:num_clusters]
     sorted_eigenvectors = eigenvectors[:, sort_indices]
     
     # select the first 'num_clusters' columns from the sorted eigenvectors
@@ -345,6 +353,52 @@ def plot_step6():
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
+
+@app.route('/all_steps')
+def all_steps():
+    num_clusters = session.get('num_clusters')
+    sample_size = session.get('sample_size')
+    noise = session.get('noise')
+    X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
+
+    kernel = RBF(length_scale=length_scale)
+    affinity_matrix = kernel(X)
+
+    D = np.diag(np.round(np.sum(affinity_matrix, axis=1), 2))
+    D_inverse = np.linalg.inv(D)
+    D_powered = np.sqrt(D_inverse)
+    L = np.matmul(D_powered, affinity_matrix)
+    L = np.matmul(L, D_powered)
+
+    eigenvalues, eigenvectors = eigh(L)
+
+    # get the indices that would sort the eigenvalues from scipy.linalg.eigh in the same order as those from numpy.linalg.eig
+    sort_indices = np.argsort(eigenvalues)
+    # descending order
+    sort_indices = sort_indices[::-1]
+    # use these indices to sort the eigenvectors from scipy.linalg.eigh
+    sorted_eigenvalues = eigenvalues[sort_indices]
+    sorted_eigenvalues = sorted_eigenvalues[:num_clusters]
+    sorted_eigenvectors = eigenvectors[:, sort_indices]
+    # sorted_eigenvectors = sorted_eigenvectors[:num_clusters]
+    
+    # select the first 'num_clusters' columns from the sorted eigenvectors
+    Y = sorted_eigenvectors[:, :num_clusters]
+
+    Y_normalized = normalize(Y, axis=1, norm='l2')
+    kmeans = KMeans(n_clusters=num_clusters, max_iter=1000)
+    kmeans.fit(Y_normalized)
+
+    labels = kmeans.labels_
+    # Convert the NumPy arrays to lists of lists for Jinja2
+    sorted_eigenvalues = sorted_eigenvalues.tolist()
+    sorted_eigenvectors = [list(vec) for vec in sorted_eigenvectors[:, :num_clusters].T]
+    Y_normalized = Y_normalized.T # Transpose Y_normalized before converting to list of lists
+    Y_normalized = [list(vec) for vec in Y_normalized]
+
+    return render_template('all.html', eigenvalues=sorted_eigenvalues, eigenvectors=sorted_eigenvectors,
+                           Y_normalized=Y_normalized, num_clusters=num_clusters, sample_size=sample_size, noise=noise, labels=labels)
+
 
 
 @app.route('/')

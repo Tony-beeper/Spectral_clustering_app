@@ -1,0 +1,33 @@
+.biggest-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.small-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.step4-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0em;
+  background-color: #2b2b2b;
+  color: #fff;
+  position: relative;
+}
+
+.step5-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 1em;
+  background-color: #2b2b2b;
+  color: #fff;
+}

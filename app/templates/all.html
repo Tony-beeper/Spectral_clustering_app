@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step1.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step2.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step3.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step4.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step5.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/step6.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/buttons.css') }}"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/all.css') }}"
+    />
+  </head>
+  <body>
+    <div class="biggest-container">
+      <h2>Step 1: Make Moons Data Graph</h2>
+      <div class="small-container">
+        <img
+          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+          alt="Image"
+          class="center"
+        />
+      </div>
+      <h2>Step 2: Affinity Matrix</h2>
+      <div class="small-container">
+        <img src="{{ url_for('plot_step2') }}" alt="Image" class="center" />
+      </div>
+      <h2>Step 3: Diagonal and Laplacian Matrix</h2>
+      <div class="small-container">
+        <div class="container">
+          <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
+          <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
+        </div>
+      </div>
+      <h2>Step 4: Eigenvalues and Eigenvectors</h2>
+      <div class="step4-container">
+        <div class="mega-container">
+          <div>
+            <div class="container-4 my-4">
+              <h3 class="text-center my-3">k largest Eigenvalues:</h3>
+              <div class="row">
+                {% for eigenvalue in eigenvalues %}
+                <div class="col-md-4">
+                  <div class="eigenvalue-box p-3 my-2">
+                    <p class="mb-0">{{ eigenvalue }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="container-4 my-4">
+              <h3 class="text-center my-3">k largest Eigenvectors:</h3>
+              <div class="eigenvectors-container">
+                {% for eigenvector in eigenvectors %}
+                <div class="eigenvector-box p-3 my-2">
+                  {% for element in eigenvector %}
+                  <p class="mb-0">{{ element }}</p>
+                  {% endfor %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="container-4 my-4">
+              <h3 class="text-center my-3">Normalized Eigenvectors:</h3>
+              <div class="eigenvectors-container">
+                {% for y in Y_normalized %}
+                <div class="eigenvector-box p-3 my-2">
+                  {% for element in y %}
+                  <p class="mb-0">{{ element }}</p>
+                  {% endfor %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2>Step 5: Cluster Labels</h2>
+      <div class="step5-container">
+        <img
+          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+          alt="Image"
+          class="center"
+        />
+        <!-- </div> -->
+        <div>
+          <h2>Label for each point:</h2>
+          <div>
+            {% for label in labels %}
+            <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <h2>Step 6: Clustered Graph</h2>
+
+      <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+    </div>
+  </body>
+</html>
