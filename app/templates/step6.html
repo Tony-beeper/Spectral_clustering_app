@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
+  <!-- <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div> -->
   <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -20,9 +33,14 @@
     >
       <
     </button>
-    <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+    <div class="container-6">
+      <h2>Step 6: Spectral Clustered Graph</h2>
+      <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+    </div>
     <button class="next-and-pre-btn" onclick="location.href='/'" type="button">
       Home Page
     </button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

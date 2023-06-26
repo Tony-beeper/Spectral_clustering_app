@@ -7,10 +7,34 @@ body {
   background-color: #2b2b2b;
   color: #fff;
 }
+#next-btn {
+  position: absolute;
+  right: 10px;
+  top: 300px;
+}
+#prev-btn {
+  position: absolute;
+  left: 10px;
+  top: 300px;
+}
 
 img.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+.container-5 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.mega-container-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }

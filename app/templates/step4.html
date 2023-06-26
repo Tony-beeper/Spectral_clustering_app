@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <!-- <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div> -->
   <head>
     <title>Step 4</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -22,7 +35,9 @@
     >
       <
     </button>
-    <div class="mega-container">
+
+    <div class="mega-container-4">
+      <h2>Step4: Eigenvalues and Eigenvectors</h2>
       <div>
         <div class="container-4 my-4">
           <h3 class="text-center my-3">k largest Eigenvalues:</h3>
@@ -63,6 +78,7 @@
         </div>
       </div>
     </div>
+
     <button
       type="button"
       class="next-and-pre-btn"
@@ -71,5 +87,7 @@
     >
       >
     </button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

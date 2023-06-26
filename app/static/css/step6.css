@@ -12,3 +12,10 @@ img.center {
   margin-right: auto;
   width: 50%;
 }
+.container-6 {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}

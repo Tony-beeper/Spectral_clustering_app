@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <!-- <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div> -->
   <head>
     <title>Image</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -17,11 +30,14 @@
     <button type="button" class="next-and-pre-btn" onclick="location.href='/'">
       <
     </button>
-    <img
-      src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
-      alt="Image"
-      class="center"
-    />
+    <div class="container-1">
+      <h2>Step 1: Make Moons Data Graph</h2>
+      <img
+        src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+        alt="Image"
+        class="center"
+      />
+    </div>
     <button
       type="button"
       class="next-and-pre-btn"
@@ -29,5 +45,7 @@
     >
       >
     </button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

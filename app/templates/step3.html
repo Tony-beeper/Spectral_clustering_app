@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div>
   <head>
     <title>Step 3</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -21,9 +34,12 @@
     >
       <
     </button>
-    <div class="container">
-      <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
-      <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
+    <div class="mega-container-3">
+      <h2>Step 3: Diagonal and Laplacian Matrix</h2>
+      <div class="container-3">
+        <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
+        <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
+      </div>
     </div>
     <button
       type="button"
@@ -32,5 +48,7 @@
     >
       >
     </button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

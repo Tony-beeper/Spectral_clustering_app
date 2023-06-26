@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
+  <div id="preloader">
+    <div id="status">&nbsp;</div>
+    
+  </div>
+
   <head>
     <title>Image</title>
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -131,5 +147,7 @@
 
       <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

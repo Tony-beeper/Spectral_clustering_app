@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div> -->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/favicon.ico') }}"
+      type="image/x-icon"
+    />
 
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -89,9 +107,61 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>About the Application</h3>
+            <div class="scrollable-textbox">
+              <p>
+                This application is designed to demonstrate the concept and
+                application of Spectral Clustering, a powerful technique in the
+                field of machine learning and data science. Using a
+                user-friendly interface, you can input parameters and see how
+                they affect the clustering process. The parameters include the
+                sample size, the number of clusters, and the level of noise in
+                the data.
+              </p>
+            </div>
+          </div>
+          <div class="description">
+            <h3 class="linked-header">
+              <a
+                href="https://proceedings.neurips.cc/paper_files/paper/2001/file/801272ee79cfde7fa5960571fee36b9b-Paper.pdf"
+                target="_blank"
+                rel="noopener"
+              >
+                Theory: "On Spectral Clustering: Analysis and an algorithm"
+              </a>
+            </h3>
+            <div class="scrollable-textbox">
+              <p>
+                Andrew Ng's paper on spectral clustering provides a deep insight
+                into the mathematical and theoretical foundations of this
+                technique. The paper details the algorithmic process involved,
+                which includes constructing a similarity graph, generating the
+                Laplacian matrix, performing eigen decomposition, and finally
+                applying k-means clustering on the obtained eigen vectors. It
+                highlights the ability of Spectral Clustering to handle
+                non-convex clusters, making it superior to traditional methods
+                like K-means for a wide range of applications.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <footer>
+      <nav class="navbar fixed-bottom navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{{ url_for('credit') }}">Credits</a>
+        </div>
+      </nav>
+    </footer>
   </body>
 </html>

@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
+  <!-- <div id="preloader">
+    <div id="status">&nbsp;</div>
+  </div> -->
   <head>
     <title>Image</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/preloader.css') }}"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -18,33 +31,41 @@
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step4'"
+      id="prev-btn"
     >
       <
     </button>
-    <!-- <div class="container"> -->
-    <!-- <div>  -->
-    <img
-      src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
-      alt="Image"
-      class="center"
-    />
-    <!-- </div> -->
-    <div>
-      <h2>Label for each point:</h2>
-      <div>
-        {% for label in labels %}
-        <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
-        {% endfor %}
+    <div class="mega-container-5">
+      <h2>Step 5: K-Means Label for Clustering</h2>
+      <div class="container-5">
+        <!-- <div>  -->
+
+        <img
+          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+          alt="Image"
+          class="center"
+        />
+        <!-- </div> -->
+        <div>
+          <h2>Label for each point:</h2>
+          <div>
+            {% for label in labels %}
+            <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
-    <!-- </div> -->
 
     <button
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step6'"
+      id="next-btn"
     >
       >
     </button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

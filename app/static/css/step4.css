@@ -18,7 +18,8 @@ body {
   top: 300px;
 }
 
-.mega-container {
+
+.mega-container-4 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,9 +29,9 @@ body {
 
 .container-4 {
   display: flex;
-  justify-content: center; /* Adjusts container's items to the center */
+  justify-content: center;
   align-items: center;
-  flex-direction: column; /* Stacks .eigenvectors-container(s) vertically */
+  flex-direction: column; 
   width: 100%;
 }
 

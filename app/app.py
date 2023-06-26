@@ -405,6 +405,11 @@ def all_steps():
 def home():
     return render_template('index.html')
 
+@app.route('/credit')
+def credit():
+  return render_template('credits.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
