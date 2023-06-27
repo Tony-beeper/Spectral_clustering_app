@@ -12,7 +12,10 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 app = Flask(__name__)
-length_scale = 0.1
+# 0.11 is good until 23
+# 0.12 is good until 17
+# 0.14 is good until 15
+length_scale = 0.14
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Be sure to set a secret key
 base_plot_sample_size = 20
 mask_scale = 250
