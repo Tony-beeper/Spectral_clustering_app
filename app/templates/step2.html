@@ -3,8 +3,10 @@
   <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step2</title>
+
     <link
       rel="icon"
       href="{{ url_for('static', filename='images/favicon.ico') }}"
@@ -36,20 +38,61 @@
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step1'"
+      id="previous-btn"
     >
       <
     </button>
     <div class="container-2">
       <h2>Step 2: Affinity Matrix</h2>
       <img src="{{ url_for('plot_step2') }}" alt="Image" class="center" />
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Matrix Explaination</h3>
+          <div class="scrollable-textbox">
+            <p>
+              The matrix above represents how close two points from the
+              make_moons dataset is. If point \(x\) and point \(y\) are close
+              together in the plot, then the matrix entry \(A_{xy}\) should have
+              relatively higher value compare to entry \(A_{ij}\) where \(i\)
+              and \(j\) are not as close as \(x\) and \(x\). The data is
+              represented intuitively in heatmap.
+            </p>
+            <h4>
+              The affinity matrix is calculated using RBF kernel equation as
+              follows:
+            </h4>
+            {% raw %}
+            <p>
+              $$ K(x, y) = \exp\left(-\frac{{\|x-y\|^2}}{{2\sigma^2}}\right) $$
+            </p>
+            {% endraw %}
+            <p>\( \bullet \) \(x\) and \(y\) are two data points.</p>
+            <p>
+              \(\bullet\ ||x-y||^2 \) is the squared Euclidean distance between
+              the two points.
+            </p>
+            <p>
+              \(\bullet\ \sigma \) is the length scale parameter tunned by the
+              develoepr(me). Where lower length scale makes us consider two
+              points with less euclidean distance to be close and vice versa.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <button
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step3'"
+      id="next-btn"
     >
       >
     </button>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>

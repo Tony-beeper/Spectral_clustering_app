@@ -3,6 +3,7 @@
   <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step1</title>
     <link
@@ -32,7 +33,12 @@
     />
   </head>
   <body>
-    <button type="button" class="next-and-pre-btn" onclick="location.href='/'">
+    <button
+      type="button"
+      id="previous-btn"
+      class="next-and-pre-btn"
+      onclick="location.href='/' "
+    >
       <
     </button>
     <div class="container-1">
@@ -42,11 +48,34 @@
         alt="Image"
         class="center"
       />
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Plot description</h3>
+          <div class="scrollable-textbox">
+            <p>
+              The first step is plotting our data set using the
+              <a
+                href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html"
+                target="_blank"
+                class="highlight-link"
+              >
+                make_moons dataset from the sci-kit learn library</a
+              >. This will be the data set we will use to cluster for optimal
+              visualization and educational purposes. Theoretically, we will be
+              able to cluster them into two sets of points, one for each moon
+              coresspondingly. Some noise can potentially interfere the
+              clustering process thus it's not guaranteed to be clustered
+              perfectly.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <button
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step2'"
+      id="next-btn"
     >
       >
     </button>

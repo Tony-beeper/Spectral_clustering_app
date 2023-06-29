@@ -3,6 +3,7 @@
   <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step1</title>
     <link
@@ -36,14 +37,31 @@
       class="next-and-pre-btn"
       onclick="location.href='/step5'"
       type="button"
+      id="previous-btn"
     >
       <
     </button>
     <div class="container-6">
       <h2>Step 6: Spectral Clustered Graph</h2>
       <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Description</h3>
+          <div class="scrollable-textbox">
+            <p>
+              This is the final result of the clustering. The nodes are colored
+              based on the labels we get from k-means.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="next-and-pre-btn" onclick="location.href='/'" type="button">
+    <button
+      class="next-and-pre-btn"
+      onclick="location.href='/'"
+      type="button"
+      id="next-btn"
+    >
       Home Page
     </button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -3,6 +3,7 @@
   <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step5</title>
     <link
@@ -36,7 +37,7 @@
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step4'"
-      id="prev-btn"
+      id="previous-btn"
     >
       <
     </button>
@@ -57,6 +58,25 @@
             {% for label in labels %}
             <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
             {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Description</h3>
+          <div class="scrollable-textbox">
+            <p>
+              After we obtained the eigenvectors, we applied
+              <a
+                href="https://en.wikipedia.org/wiki/K-means_clustering"
+                target="_blank"
+                class="highlight-link"
+                >k-means</a
+              >
+              to the normalized eigenvectors to get the cluster labels for
+              corresponding points. The labels are then assigned to the original
+              data points (nodes) as shown.
+            </p>
           </div>
         </div>
       </div>
