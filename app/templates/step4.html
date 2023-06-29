@@ -3,6 +3,7 @@
   <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
   </div> -->
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step4</title>
     <link
@@ -35,7 +36,7 @@
     <button
       type="button"
       class="next-and-pre-btn"
-      id="prev-btn"
+      id="previous-btn"
       onclick="location.href='/step3'"
     >
       <
@@ -82,6 +83,29 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Eigenvalues and Eigenvectors Explaination</h3>
+          <div class="scrollable-textbox">
+            <p>
+              Taking the k largest eigenvectors provides a new,
+              lower-dimensional space to represent the data points (nodes) for
+              easier clustering. This space tends to group nodes that are
+              closely connected in the original graph (those within the same
+              cluster) together, which leads to more effective clustering
+              results.
+            </p>
+            <p>This step we calculate the eigenvalues by using formula:</p>
+            <p>$$\forall λ,\ |A - λI| = 0\ $$</p>
+            <p>And the calclate the eigenvectors with formula:</p>
+            <p>$$\forall λ,\ ( A − λ I) x = 0\ $$</p>
+            <p>
+              where \(x_i\) is the eigenvector with corresponsding eigenvalue
+              \(\lambda_i\)
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button
@@ -92,6 +116,11 @@
     >
       >
     </button>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>

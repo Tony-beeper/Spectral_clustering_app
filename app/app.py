@@ -4,7 +4,10 @@ from scipy.linalg import eigh
 import numpy as np
 import pandas as pd
 from sklearn.datasets import make_moons
+from sklearn.datasets import make_circles
+
 from sklearn.preprocessing import normalize
+
 from sklearn.cluster import KMeans
 from sklearn.gaussian_process.kernels import RBF
 import io
@@ -23,9 +26,9 @@ mask_scale = 250
 
 def set_mask_scale(sample_size):
     if sample_size > 0 and sample_size <=24:
-        return 250
+        return 10
     elif sample_size > 24 and sample_size <= 32:
-        return 5
+        return 2.5
     else:
         return 1
 
@@ -307,7 +310,7 @@ def plot_step6():
 
     noise = session.get('noise')
 
-
+    # X, y = make_circles(n_samples=sample_size, factor=0.3, noise=noise)
     X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
 
 
@@ -362,6 +365,12 @@ def all_steps():
     num_clusters = session.get('num_clusters')
     sample_size = session.get('sample_size')
     noise = session.get('noise')
+
+    # Generate circle dataset
+    # X, y = make_circles(n_samples=sample_size, factor=0.3, noise=noise)
+    
+    # Plot the dataset
+
     X, _ = make_moons(n_samples=sample_size, noise=noise, random_state=0)
 
     kernel = RBF(length_scale=length_scale)

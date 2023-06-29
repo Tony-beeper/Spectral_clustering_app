@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <a href="/" id="homeButton">Home</a>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,15 +9,16 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/base.css') }}"
+    />
+    <link
       rel="icon"
       href="{{ url_for('static', filename='images/favicon.ico') }}"
       type="image/x-icon"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='css/index.css') }}"
-    />
+
     <title>Credits</title>
   </head>
   <body class="bg-dark text-white">
@@ -37,6 +39,11 @@
           <a href="https://gifer.com/en/1FMl" target="_blank" rel="noopener">
             https://gifer.com/en/1FMl
           </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="linked-header">More to come ...</h2>
         </div>
       </div>
     </div>

@@ -31,3 +31,52 @@
   background-color: #2b2b2b;
   color: #fff;
 }
+
+.description {
+  background-color: #3c3c3c;
+  color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* For scrollable textbox styling */
+
+.scrollable-textbox {
+  background-color: #3c3c3c; /* or any color that fits your theme */
+  color: #fff; /* text color */
+  padding: 10px; /* inner space */
+  margin-top: 10px; /* space above the box */
+  border: none;
+  max-height: 200px; /* adjust based on your needs */
+  overflow-y: scroll; /* adds vertical scroll if content exceeds max-height */
+}
+
+/* Customizing the scrollbar */
+
+.scrollable-textbox::-webkit-scrollbar {
+  width: 5px; /* width of the scrollbar */
+}
+
+.scrollable-textbox::-webkit-scrollbar-track {
+  background: #3c3c3c; /* color of the track */
+}
+
+.scrollable-textbox::-webkit-scrollbar-thumb {
+  background: #007bff; /* color of the scroll thumb */
+  border-radius: 2px; /* roundness of the scroll thumb */
+}
+
+.scrollable-textbox::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* color of the scroll thumb on hover */
+}
+
+.highlight-link {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.highlight-link:hover {
+  color: #0056b3;
+}
+

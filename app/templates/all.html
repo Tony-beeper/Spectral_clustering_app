@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <div id="preloader">
+  <!-- <div id="preloader">
     <div id="status">&nbsp;</div>
-  </div>
+  </div> -->
+  <a href="/" id="homeButton">Home</a>
 
   <head>
     <title>All</title>
+
     <link
       rel="icon"
       href="{{ url_for('static', filename='images/favicon.ico') }}"
       type="image/x-icon"
     />
+    <!-- <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    /> -->
 
     <link
       rel="stylesheet"
@@ -74,16 +80,137 @@
           alt="Image"
           class="center"
         />
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>Plot description</h3>
+            <div class="scrollable-textbox">
+              <p>
+                The first step is plotting our data set using the
+                <a
+                  href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html"
+                  target="_blank"
+                  class="highlight-link"
+                >
+                  make_moons dataset from the sci-kit learn library</a
+                >. This will be the data set we will use to cluster for optimal
+                visualization and educational purposes. Theoretically, we will
+                be able to cluster them into two sets of points, one for each
+                moon coresspondingly. Some noise can potentially interfere the
+                clustering process thus it's not guaranteed to be clustered
+                perfectly.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <h2>Step 2: Affinity Matrix</h2>
       <div class="small-container">
         <img src="{{ url_for('plot_step2') }}" alt="Image" class="center" />
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>Matrix Explaination</h3>
+            <div class="scrollable-textbox">
+              <p>
+                The matrix above represents how close two points from the
+                make_moons dataset is. If point \(x\) and point \(y\) are close
+                together in the plot, then the matrix entry \(A_{xy}\) should
+                have relatively higher value compare to entry \(A_{ij}\) where
+                \(i\) and \(j\) are not as close as \(x\) and \(x\). The data is
+                represented intuitively in heatmap.
+              </p>
+              <h4>
+                The affinity matrix is calculated using RBF kernel equation as
+                follows:
+              </h4>
+              {% raw %}
+              <p>
+                $$ K(x, y) = \exp\left(-\frac{{\|x-y\|^2}}{{2\sigma^2}}\right)
+                $$
+              </p>
+              {% endraw %}
+              <p>\( \bullet \) \(x\) and \(y\) are two data points.</p>
+              <p>
+                \(\bullet\ ||x-y||^2 \) is the squared Euclidean distance
+                between the two points.
+              </p>
+              <p>
+                \(\bullet\ \sigma \) is the length scale parameter tunned by the
+                develoepr(me). Where lower length scale makes us consider two
+                points with less euclidean distance to be close and vice versa.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <h2>Step 3: Diagonal and Laplacian Matrix</h2>
       <div class="small-container">
         <div class="container">
           <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
           <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
+        </div>
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>Matrices Explaination</h3>
+            <div class="scrollable-textbox">
+              <p>
+                The Diagonal Matrix is also a degree matrix which simply the sum
+                of each row of the affinity matrix where each entry \(A_{i,i}\)
+                is the sum of the row \(i\) of the affinity matrix. With rest of
+                the entries being 0. It measure how well connected each node is.
+              </p>
+              <h4>
+                The Diagonal Matrix \(D\) is calculated using equation below:
+              </h4>
+              {% raw %}
+              <p>
+                $$\forall i, \ D_{i,i} = \sum_{j=0}^{n-1} A_{i,j}\ \ and\ \
+                \forall j, j\neq i,\ D_{i,j}=0$$
+              </p>
+              {% endraw %}
+              <p>
+                The Lapacian Matrix is a matrix that captures the connectivity
+                and structure of the graph. We can think of it as, for each node
+                (or vertex), it counts how many connections (or edges) that node
+                has (the degree), and it also keeps track of which nodes are
+                connected to each other (the adjacency). Here, we are using the
+                normalized lapacian matrix because it better captures the
+                connectivity of the graph. It accounts for the sum of degree of
+                each clusters rather than just the number of nodes in each
+                cluster. The formula is as follow:
+              </p>
+              <h4>Normalized Lapacian:</h4>
+              <p>$$L = D^{-1/2}AD^{-1/2} $$</p>
+
+              <p>
+                It has an edge over the unnormalized Lapacian with formula \(L =
+                D - A\) because the unnormalized lapacian does not accounts for
+                the connectivity of the graph, but it only cares about number of
+                nodes potentially in each cluster. It works well for
+                <a
+                  href="https://en.wikipedia.org/wiki/Regular_graph"
+                  target="_blank"
+                  class="highlight-link"
+                  >regular graph</a
+                >, but not for irregular graph.
+              </p>
+              <p>
+                For more detials of normalized lapcian versus unnormalized
+                lapcian,
+                <a
+                  href="https://math.stackexchange.com/questions/1113467/why-laplacian-matrix-need-normalization-and-how-come-the-sqrt-of-degree-matrix  "
+                  target="_blank"
+                  class="highlight-link"
+                  >click here.</a
+                >
+              </p>
+              <p>
+                So now, we have the Lapcian which captures the important
+                characteristics of the graph, and the next step, we will try to
+                extract the most important features from the matrix to help us
+                perform a k-clusterering.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <h2>Step 4: Eigenvalues and Eigenvectors</h2>
@@ -128,30 +255,102 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <h2>Step 5: Cluster Labels</h2>
-      <div class="step5-container">
-        <img
-          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
-          alt="Image"
-          class="center"
-        />
-        <!-- </div> -->
-        <div>
-          <h2>Label for each point:</h2>
-          <div>
-            {% for label in labels %}
-            <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
-            {% endfor %}
+          <div class="col-lg-8 mx-auto">
+            <div class="description">
+              <h3>Eigenvalues and Eigenvectors Explaination</h3>
+              <div class="scrollable-textbox">
+                <p>
+                  Taking the k largest eigenvectors provides a new,
+                  lower-dimensional space to represent the data points (nodes)
+                  for easier clustering. This space tends to group nodes that
+                  are closely connected in the original graph (those within the
+                  same cluster) together, which leads to more effective
+                  clustering results.
+                </p>
+                <p>This step we calculate the eigenvalues by using formula:</p>
+                <p>$$\forall λ,\ |A - λI| = 0\ $$</p>
+                <p>And the calclate the eigenvectors with formula:</p>
+                <p>$$\forall λ,\ ( A − λ I) x = 0\ $$</p>
+                <p>
+                  where \(x_i\) is the eigenvector with corresponsding
+                  eigenvalue \(\lambda_i\)
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <h2>Step 6: Clustered Graph</h2>
+      <h2>
+        Step 5: Cluster Labels after
+        <a
+          href="https://en.wikipedia.org/wiki/K-means_clustering"
+          target="_blank"
+          class="highlight-link"
+          >k-means</a
+        >
+      </h2>
+      <div class="small-container">
+        <div class="step5-container">
+          <img
+            src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+            alt="Image"
+            class="center"
+          />
+          <!-- </div> -->
+          <div>
+            <h2>Label for each point:</h2>
+            <div>
+              {% for label in labels %}
+              <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>Description</h3>
+            <div class="scrollable-textbox">
+              <p>
+                After we obtained the eigenvectors, we applied
+                <a
+                  href="https://en.wikipedia.org/wiki/K-means_clustering"
+                  target="_blank"
+                  class="highlight-link"
+                  >k-means</a
+                >
+                to the normalized eigenvectors to get the cluster labels for
+                corresponding points. The labels are then assigned to the
+                original data points (nodes) as shown.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+      <h2>Step 6: Clustered Graph</h2>
+      <div class="small-container">
+        <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
+        <div class="col-lg-8 mx-auto">
+          <div class="description">
+            <h3>Description</h3>
+            <div class="scrollable-textbox">
+              <p>
+                This is the final result of the clustering. The nodes are
+                colored based on the labels we get from k-means.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

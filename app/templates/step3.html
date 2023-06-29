@@ -3,6 +3,7 @@
   <div id="preloader">
     <div id="status">&nbsp;</div>
   </div>
+  <a href="/" id="homeButton">Home</a>
   <head>
     <title>Step3</title>
     <link
@@ -36,6 +37,7 @@
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step2'"
+      id="previous-btn"
     >
       <
     </button>
@@ -45,15 +47,85 @@
         <img src="{{ url_for('plot_step3_1') }}" alt="Diagonal Matrix" />
         <img src="{{ url_for('plot_step3_2') }}" alt="Laplacian Matrix" />
       </div>
+      <div class="col-lg-8 mx-auto">
+        <div class="description">
+          <h3>Matrices Explaination</h3>
+          <div class="scrollable-textbox">
+            <p>
+              The Diagonal Matrix is also a degree matrix which simply the sum
+              of each row of the affinity matrix where each entry \(A_{i,i}\) is
+              the sum of the row \(i\) of the affinity matrix. With rest of the
+              entries being 0. It measure how well connected each node is.
+            </p>
+            <h4>
+              The Diagonal Matrix \(D\) is calculated using equation below:
+            </h4>
+            {% raw %}
+            <p>
+              $$\forall i, \ D_{i,i} = \sum_{j=0}^{n-1} A_{i,j}\ \ and\ \
+              \forall j, j\neq i,\ D_{i,j}=0$$
+            </p>
+            {% endraw %}
+            <p>
+              The Lapacian Matrix is a matrix that captures the connectivity and
+              structure of the graph. We can think of it as, for each node (or
+              vertex), it counts how many connections (or edges) that node has
+              (the degree), and it also keeps track of which nodes are connected
+              to each other (the adjacency). Here, we are using the normalized
+              lapacian matrix because it better captures the connectivity of the
+              graph. It accounts for the sum of degree of each clusters rather
+              than just the number of nodes in each cluster. The formula is as
+              follow:
+            </p>
+            <h4>Normalized Lapacian:</h4>
+            <p>$$L = D^{-1/2}AD^{-1/2} $$</p>
+
+            <p>
+              It has an edge over the unnormalized Lapacian with formula \(L = D
+              - A\) because the unnormalized lapacian does not accounts for the
+              connectivity of the graph, but it only cares about number of nodes
+              potentially in each cluster. It works well for
+              <a
+                href="https://en.wikipedia.org/wiki/Regular_graph"
+                target="_blank"
+                class="highlight-link"
+                >regular graph</a
+              >, but not for irregular graph.
+            </p>
+            <p>
+              For more detials of normalized lapcian versus unnormalized
+              lapcian,
+              <a
+                href="https://math.stackexchange.com/questions/1113467/why-laplacian-matrix-need-normalization-and-how-come-the-sqrt-of-degree-matrix  "
+                target="_blank"
+                class="highlight-link"
+                >click here.</a
+              >
+            </p>
+            <p>
+              So now, we have the Lapcian which captures the important
+              characteristics of the graph, and the next step, we will try to
+              extract the most important features from the matrix to help us
+              perform a k-clusterering.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <button
       type="button"
       class="next-and-pre-btn"
       onclick="location.href='/step4'"
+      id="next-btn"
     >
       >
     </button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
   </body>
 </html>
