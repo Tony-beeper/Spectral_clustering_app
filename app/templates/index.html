@@ -42,10 +42,20 @@
     <title>Clustering App</title>
   </head>
   <body>
-    <div class="container py-5">
+    <div class="container">
       <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div class="card">
+        <div
+          class="col-lg-6 mx-auto position-fixed d-flex justify-content-center align-items-center"
+          style="
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow: auto;
+            height: 100%;
+            transform: translateY(-3.9%);
+          "
+        >
+          <div class="card flex-fill" style="min-width: 320px">
             <div class="card-header bg-primary text-white text-center">
               <h1>Clustering App</h1>
             </div>
@@ -111,18 +121,40 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-8 mx-auto">
+        <!-- <div
+        class="col-lg-6 mx-auto position-fixed"
+        style="right: 0; top: 0; bottom: 0; overflow: auto"
+      > -->
+        <div
+          class="col-lg-6 mx-auto position-fixed d-flex justify-content-center align-items-center flex-column"
+          style="
+            right: 0;
+            top: 0;
+            bottom: 0;
+            overflow: auto;
+            transform: translateY(-5.5%);
+          "
+        >
           <div class="description">
             <h3>About the Application</h3>
             <div class="scrollable-textbox">
               <p>
-                This application is designed to demonstrate the concept and
-                application of Spectral Clustering, a powerful technique in the
-                field of machine learning and data science. Using a
-                user-friendly interface, you can input parameters and see how
-                they affect the clustering process. The parameters include the
-                sample size, the number of clusters, and the level of noise in
-                the data.
+                This is an educational application designed to demonstrate the
+                concept and application of Spectral Clustering, a powerful
+                technique in the field of machine learning and data science.
+                This technique is used to cluster data into relevant groups.
+                Using our user-friendly interface, you can adjust parameters and
+                observe their impact on the clustering process. For optimal
+                visualization, we employ the
+                <a
+                  href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html"
+                  target="_blank"
+                  class="highlight-link"
+                  >make_moons dataset from the sci-kit learn library</a
+                >. The adjustable parameters include the sample size, the number
+                of clusters, and the level of noise in the data. Users can
+                experiment with various parameters to understand how these
+                changes affect the results of the clustering process.
               </p>
             </div>
           </div>
@@ -138,15 +170,17 @@
             </h3>
             <div class="scrollable-textbox">
               <p>
-                Andrew Ng's paper on spectral clustering provides a deep insight
-                into the mathematical and theoretical foundations of this
-                technique. The paper details the algorithmic process involved,
-                which includes constructing a similarity graph, generating the
-                Laplacian matrix, performing eigen decomposition, and finally
-                applying k-means clustering on the obtained eigen vectors. It
-                highlights the ability of Spectral Clustering to handle
-                non-convex clusters, making it superior to traditional methods
-                like K-means for a wide range of applications.
+                Stanford Professor Andrew Ng's paper on spectral clustering
+                offers deep insights into the mathematical and theoretical
+                foundations of this technique. The paper thoroughly details the
+                algorithmic process, which includes constructing a similarity
+                graph, generating the Laplacian matrix, performing eigen
+                decomposition, and finally, applying k-means clustering on the
+                obtained eigenvectors to produce the clustered dataset. The
+                paper underscores the ability of Spectral Clustering to manage
+                non-convex clusters, a feature that elevates it above
+                traditional methods like K-means for a broad array of
+                applications.
               </p>
             </div>
           </div>
@@ -158,6 +192,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scrollbooster@2.2.2/dist/scrollbooster.min.js"></script>
 
     <footer>
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
