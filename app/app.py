@@ -1,16 +1,13 @@
-from flask import Flask, render_template, Response, request, session, redirect, url_for
-
-from scipy.linalg import eigh
 import numpy as np
 import pandas as pd
+import io
+from flask import Flask, render_template, Response, request, session, redirect, url_for
+from scipy.linalg import eigh
 from sklearn.datasets import make_moons
 from sklearn.datasets import make_circles
-
 from sklearn.preprocessing import normalize
-
 from sklearn.cluster import KMeans
 from sklearn.gaussian_process.kernels import RBF
-import io
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
@@ -34,7 +31,7 @@ def set_mask_scale(sample_size):
 
 
 @app.route('/index', methods=['POST'])
-def index():
+def handle_form():
     num_clusters = int(request.form['clusters'])
     sample_size = int(request.form['sample_size'])
     display_mode = request.form.get('display_mode')  # 'on' if checked, None if not checked

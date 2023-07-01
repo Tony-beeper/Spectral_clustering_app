@@ -16,19 +16,63 @@ body {
 #homeButton {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #008cba; /* Blue background */
-  color: white; /* White text */
-  text-align: center; /* Centered text */
-  text-decoration: none; /* No underline */
-  font-size: 16px; /* Big font size */
-  position: fixed; /* Fixed position - always stay at the top-right corner */
-  top: 10px; /* Distance from top */
-  right: 10px; /* Distance from right */
-  border-radius: 12px; /* Rounded corners */
-  transition: background-color 0.3s; /* Smooth transition for hover state */
-  z-index: 9999; /* Make sure it's on top of other elements */
+  background-color: #008cba;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+  z-index: 9999;
 }
 
 #homeButton:hover {
-  background-color: #4caf50; /* Green background on hover */
+  background-color: #4caf50;
+}
+
+.description {
+  background-color: #3c3c3c;
+  color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.scrollable-textbox {
+  background-color: #3c3c3c;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.scrollable-textbox::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollable-textbox::-webkit-scrollbar-track {
+  background: #3c3c3c;
+}
+
+.scrollable-textbox::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 2px;
+}
+
+.scrollable-textbox::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}
+
+.highlight-link {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.highlight-link:hover {
+  color: #0056b3;
 }
