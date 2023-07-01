@@ -11,6 +11,7 @@ body {
 }
 .card {
   background-color: #3c3c3c;
+  transform: scale(0.9);
 }
 .form-control {
   background-color: #5a5a5a;
@@ -43,13 +44,13 @@ body {
 }
 
 .linked-header {
-  color: #fff; /* initial color, change if needed */
-  transition: color 0.3s ease; /* this enables a smooth color transition */
+  color: #fff; 
+  transition: color 0.3s ease;
 }
 
 .linked-header a {
-  text-decoration: none; /* removes the default underline of hyperlinks */
-  color: inherit; /* makes the hyperlink the same color as its parent element */
+  text-decoration: none; 
+  color: inherit; 
 }
 
 h3 {
@@ -57,67 +58,19 @@ h3 {
 }
 
 .linked-header:hover {
-  color: #007bff; /* change to desired hover color */
+  color: #007bff; 
 }
 
 .linked-header a:focus,
 .linked-header a:active {
-  color: inherit; /* makes sure the link doesn't change color on focus or active states */
-}
-
-.description {
-  background-color: #3c3c3c;
-  color: #fff;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 5px;
-}
-
-/* For scrollable textbox styling */
-
-.scrollable-textbox {
-  background-color: #3c3c3c; /* or any color that fits your theme */
-  color: #fff; /* text color */
-  padding: 10px; /* inner space */
-  margin-top: 10px; /* space above the box */
-  border: none;
-  max-height: 200px; /* adjust based on your needs */
-  overflow-y: scroll; /* adds vertical scroll if content exceeds max-height */
-}
-
-/* Customizing the scrollbar */
-
-.scrollable-textbox::-webkit-scrollbar {
-  width: 5px; /* width of the scrollbar */
-}
-
-.scrollable-textbox::-webkit-scrollbar-track {
-  background: #3c3c3c; /* color of the track */
-}
-
-.scrollable-textbox::-webkit-scrollbar-thumb {
-  background: #007bff; /* color of the scroll thumb */
-  border-radius: 2px; /* roundness of the scroll thumb */
-}
-
-.scrollable-textbox::-webkit-scrollbar-thumb:hover {
-  background: #0056b3; /* color of the scroll thumb on hover */
+  color: inherit;
 }
 
 footer .navbar-brand {
-  color: #fff; /* initial color, change if needed */
-  transition: color 0.3s ease; /* this enables a smooth color transition */
+  color: #fff; 
+  transition: color 0.3s ease;
 }
 
 footer .navbar-brand:hover {
-  color: #007bff; /* change to desired hover color */
-}
-
-.highlight-link {
-  color: #007bff;
-  text-decoration: underline;
-}
-
-.highlight-link:hover {
-  color: #0056b3;
+  color: #007bff; 
 }
