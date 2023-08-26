@@ -44,11 +44,11 @@
       type="text/css"
       href="{{ url_for('static', filename='css/step4.css') }}"
     />
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='css/step5.css') }}"
-    />
+    /> -->
     <link
       rel="stylesheet"
       type="text/css"
@@ -69,10 +69,10 @@
   </head>
   <body>
     <div class="biggest-container">
-      <h2>Step 1: Make Moons Data Graph</h2>
+      <h2>Step 1: Data Graph</h2>
       <div class="small-container">
         <img
-          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise, dataset_choice=dataset_choice) }}"
           alt="Image"
           class="center"
         />
@@ -87,7 +87,8 @@
                   target="_blank"
                   class="highlight-link"
                 >
-                  make_moons dataset from the sci-kit learn library</a
+                  make_moons, make_blobs or make_circles dataset from the
+                  sci-kit learn library</a
                 >. This will be the data set we will use to cluster for optimal
                 visualization and educational purposes. Theoretically, we will
                 be able to cluster them into two sets of points, one for each
@@ -203,7 +204,14 @@
                 So now, we have the Lapcian which captures the important
                 characteristics of the graph, and the next step, we will try to
                 extract the most important features from the matrix to help us
-                perform a k-clusterering.
+                perform a k-clusterering. For more information on the Laplacian,
+                please go to<a
+                  href="https://github.com/Tony-beeper/Spectral_clustering_app/blob/main/documentation/Beta/CSCD94%20Final%20Documentation.pdf"
+                  target="_blank"
+                  class="highlight-link"
+                >
+                  application summary pdf.</a
+                >
               </p>
             </div>
           </div>
@@ -269,61 +277,62 @@
                 <p>$$\forall λ,\ ( A − λ I) x = 0\ $$</p>
                 <p>
                   where \(x_i\) is the eigenvector with corresponsding
-                  eigenvalue \(\lambda_i\)
+                  eigenvalue \(\lambda_i\). For more information and insight
+                  about K largest eigenvalues of the normalized Laplacian matrix
+                  please go to<a
+                    href="https://github.com/Tony-beeper/Spectral_clustering_app/blob/main/documentation/Beta/CSCD94%20Final%20Documentation.pdf"
+                    target="_blank"
+                    class="highlight-link"
+                  >
+                    application summary pdf.</a
+                  >
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <h2>
-        Step 5: Cluster Labels after
-        <a
-          href="https://en.wikipedia.org/wiki/K-means_clustering"
-          target="_blank"
-          class="highlight-link"
-          >k-means</a
-        >
+        Step 5: Visualized Normalized row vectors to graph(Only available for
+        \(\leq 2\) clusters)
       </h2>
       <div class="small-container">
-        <div class="step5-container">
-          <img
-            src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
-            alt="Image"
-            class="center"
-          />
-          <!-- </div> -->
-          <div>
-            <h2>Label for each point:</h2>
-            <div>
-              {% for label in labels %}
-              <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
+        <img
+          src="{{ url_for('plot_step5') }}"
+          alt="Not supported 3 or more dimension graph"
+          class="center"
+        />
         <div class="col-lg-8 mx-auto">
           <div class="description">
             <h3>Description</h3>
             <div class="scrollable-textbox">
               <p>
-                After we obtained the eigenvectors, we applied
-                <a
-                  href="https://en.wikipedia.org/wiki/K-means_clustering"
-                  target="_blank"
-                  class="highlight-link"
-                  >k-means</a
-                >
-                to the normalized eigenvectors to get the cluster labels for
-                corresponding points. The labels are then assigned to the
-                original data points (nodes) as shown.
+                Given the above, we have \(Y_{normalized}\) from gluding the
+                ordered eigenvectors together. Namely, we have
+                \(Y_{normalized}=[v_1^T,...,v_k^T]\). So we take the row vectors
+                of \(Y_{normalized}\) and treat each vector as a point in a
+                graph as shown above. We can see the points that are close
+                together in terms of K-means centroid method, will be the
+                correct partition we intend for the original graph. The red
+                points will be the centroids for K-means. Points closer to 1
+                centroid will be grouped as one cluster.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <h2>Step 6: Clustered Graph</h2>
+      <h2>
+        Step 6: Clustered Graph after applying
+        <a
+          href="https://en.wikipedia.org/wiki/K-means_clustering"
+          target="_blank"
+          class="highlight-link"
+          >k-means</a
+        >
+        to row vectors
+      </h2>
       <div class="small-container">
         <img src="{{ url_for('plot_step6') }}" alt="Image" class="center" />
         <div class="col-lg-8 mx-auto">
@@ -332,7 +341,8 @@
             <div class="scrollable-textbox">
               <p>
                 This is the final result of the clustering. The nodes are
-                colored based on the labels we get from k-means.
+                colored based on the labels we get from k-means by treating each
+                row vector i from above as point i.
               </p>
             </div>
           </div>

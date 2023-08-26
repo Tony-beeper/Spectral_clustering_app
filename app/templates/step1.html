@@ -42,9 +42,9 @@
       <
     </button>
     <div class="container-1">
-      <h2>Step 1: Make Moons Data Graph</h2>
+      <h2>Step 1: Data Graph</h2>
       <img
-        src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
+        src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise, dataset_choice=dataset_choice) }}"
         alt="Image"
         class="center"
       />
@@ -59,11 +59,12 @@
                 target="_blank"
                 class="highlight-link"
               >
-                make_moons dataset from the sci-kit learn library</a
+                make_moons, make_blobs or make_circles dataset from the
+                sci-kit learn library</a
               >. This will be the data set we will use to cluster for optimal
-              visualization and educational purposes. Theoretically, we will be
-              able to cluster them into two sets of points, one for each moon
-              coresspondingly. Some noise can potentially interfere the
+              visualization and educational purposes. Theoretically, we will
+              be able to cluster them into two sets of points, one for each
+              moon coresspondingly. Some noise can potentially interfere the
               clustering process thus it's not guaranteed to be clustered
               perfectly.
             </p>
