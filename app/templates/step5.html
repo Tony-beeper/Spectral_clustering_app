@@ -24,7 +24,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='css/step5.css') }}"
+      href="{{ url_for('static', filename='css/step6.css') }}"
     />
     <link
       rel="stylesheet"
@@ -41,41 +41,30 @@
     >
       <
     </button>
-    <div class="mega-container-5">
-      <h2>Step 5: K-Means Label for Clustering</h2>
-      <div class="container-5">
-        <!-- <div>  -->
-
-        <img
-          src="{{ url_for('plot_step1', sample_size=sample_size, num_clusters=num_clusters, noise=noise) }}"
-          alt="Image"
-          class="center"
-        />
-        <!-- </div> -->
-        <div>
-          <h2>Label for each point:</h2>
-          <div>
-            {% for label in labels %}
-            <p>Point {{ loop.index - 1 }}:&nbsp;&nbsp;&nbsp;{{ label }}</p>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+    <div class="container-6">
+      <h2>
+        Step 5: Assign row vectors as point from step 4 to graph(Only available
+        for \(\leq 2\) clusters)
+      </h2>
+      <img
+        src="{{ url_for('plot_step5') }}"
+        alt="Not supported 3 or more dimension graph"
+        class="center"
+      />
       <div class="col-lg-8 mx-auto">
         <div class="description">
           <h3>Description</h3>
           <div class="scrollable-textbox">
             <p>
-              After we obtained the eigenvectors, we applied
-              <a
-                href="https://en.wikipedia.org/wiki/K-means_clustering"
-                target="_blank"
-                class="highlight-link"
-                >k-means</a
-              >
-              to the normalized eigenvectors to get the cluster labels for
-              corresponding points. The labels are then assigned to the original
-              data points (nodes) as shown.
+              Given the above, we have \(Y_{normalized}\) from gluding the
+              ordered eigenvectors together. Namely, we have
+              \(Y_{normalized}=[v_1^T,...,v_k^T]\). So we take the row vectors
+              of \(Y_{normalized}\) and treat each vector as a point in a graph
+              as shown above. We can see the points that are close together in
+              terms of K-means centroid method, will be the correct partition we
+              intend for the original graph. The red points will be the
+              centroids for K-means. Points closer to 1 centroid will be grouped
+              as one cluster.
             </p>
           </div>
         </div>
@@ -92,5 +81,10 @@
     </button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
   </body>
 </html>

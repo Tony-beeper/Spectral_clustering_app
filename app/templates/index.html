@@ -52,16 +52,28 @@
             bottom: 0;
             overflow: auto;
             height: 100%;
-            transform: translateY(-3.9%);
+            transform: translateY(-1%);
           "
         >
-          <div class="card flex-fill" style="min-width: 320px">
+          <div class="card flex-fill" style="transform: scale(0.8)">
             <div class="card-header bg-primary text-white text-center">
               <h1>Clustering App</h1>
             </div>
             <div class="card-body">
               <h2 class="text-center">Spectral Clustering</h2>
               <form action="/index" method="post" class="py-4">
+                <div class="form-group">
+                  <label for="dataset_choice">Choose Dataset:</label>
+                  <select
+                    class="form-control"
+                    id="dataset_choice"
+                    name="dataset_choice"
+                  >
+                    <option value="make_moons" selected>make_moons</option>
+                    <option value="make_circles">make_circles</option>
+                    <option value="make_blobs">make_blobs</option>
+                  </select>
+                </div>
                 <div class="form-group">
                   <label for="sample_size">Sample size:</label>
                   <input
@@ -99,6 +111,18 @@
                     required
                   />
                 </div>
+                <div class="form-group">
+                  <label for="length_scale">length_scale(\(\sigma\)):</label>
+                  <input
+                    type="number"
+                    id="length_scale"
+                    name="length_scale"
+                    class="form-control"
+                    min="0"
+                    step="any"
+                    placeholder="Default: 0.14, optional field for advanced user"
+                  />
+                </div>
                 <div
                   class="form-group custom-control custom-checkbox text-center"
                 >
@@ -121,10 +145,6 @@
         </div>
       </div>
       <div class="row">
-        <!-- <div
-        class="col-lg-6 mx-auto position-fixed"
-        style="right: 0; top: 0; bottom: 0; overflow: auto"
-      > -->
         <div
           class="col-lg-6 mx-auto position-fixed d-flex justify-content-center align-items-center flex-column"
           style="
@@ -193,7 +213,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/scrollbooster@2.2.2/dist/scrollbooster.min.js"></script>
-
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
     <footer>
       <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <div class="container d-flex">
