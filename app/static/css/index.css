@@ -90,12 +90,13 @@ footer .navbar-brand:hover {
   flex: 1;
   max-width: calc(50% - 10px);
   margin: 5px;
+  transform: translateY(-7.5%);
 }
 .content-right {
   flex: 1;
   max-width: calc(50% - 10px);
   margin: 5px;
-  transform: translateY(8.5%);
+  transform: translateY(1.5%);
 }
 
 @media (max-width: 992px) {
