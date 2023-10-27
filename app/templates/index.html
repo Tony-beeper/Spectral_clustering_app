@@ -43,166 +43,143 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div
-          class="col-lg-6 mx-auto position-fixed d-flex justify-content-center align-items-center"
-          style="
-            left: 0;
-            top: 0;
-            bottom: 0;
-            overflow: auto;
-            height: 100%;
-            transform: translateY(-1%);
-          "
-        >
-          <div class="card flex-fill" style="transform: scale(0.8)">
-            <div class="card-header bg-primary text-white text-center">
-              <h1>Clustering App</h1>
-            </div>
-            <div class="card-body">
-              <h2 class="text-center">Spectral Clustering</h2>
-              <form action="/index" method="post" class="py-4">
-                <div class="form-group">
-                  <label for="dataset_choice">Choose Dataset:</label>
-                  <select
-                    class="form-control"
-                    id="dataset_choice"
-                    name="dataset_choice"
-                  >
-                    <option value="make_moons" selected>make_moons</option>
-                    <option value="make_circles">make_circles</option>
-                    <option value="make_blobs">make_blobs</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="sample_size">Sample size:</label>
-                  <input
-                    type="number"
-                    id="sample_size"
-                    name="sample_size"
-                    class="form-control"
-                    min="1"
-                    placeholder="Recommended: 20-35"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="clusters">Number of clusters:</label>
-                  <input
-                    type="number"
-                    id="clusters"
-                    name="clusters"
-                    class="form-control"
-                    min="1"
-                    placeholder="Recommended: 2"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="noise">Noise:</label>
-                  <input
-                    type="number"
-                    id="noise"
-                    name="noise"
-                    class="form-control"
-                    min="0"
-                    step="any"
-                    placeholder="Recommended: 0-0.05"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="length_scale">length_scale(\(\sigma\)):</label>
-                  <input
-                    type="number"
-                    id="length_scale"
-                    name="length_scale"
-                    class="form-control"
-                    min="0"
-                    step="any"
-                    placeholder="Default: 0.14, optional field for advanced user"
-                  />
-                </div>
-                <div
-                  class="form-group custom-control custom-checkbox text-center"
+      <div class="content-left">
+        <div class="card flex-fill" style="transform: scale(0.8)">
+          <div class="card-header bg-primary text-white text-center">
+            <h1>Clustering App</h1>
+          </div>
+          <div class="card-body">
+            <h2 class="text-center">Spectral Clustering</h2>
+            <form action="/index" method="post" class="py-4">
+              <div class="form-group">
+                <label for="dataset_choice">Choose Dataset:</label>
+                <select
+                  class="form-control"
+                  id="dataset_choice"
+                  name="dataset_choice"
                 >
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="displayCheck"
-                    name="display_mode"
-                  />
-                  <label class="custom-control-label" for="displayCheck"
-                    >Check for step-by-step display</label
-                  >
-                </div>
-                <div class="form-group text-center">
-                  <input type="submit" value="Submit" class="btn-submit" />
-                </div>
-              </form>
-            </div>
+                  <option value="make_moons" selected>make_moons</option>
+                  <option value="make_circles">make_circles</option>
+                  <option value="make_blobs">make_blobs</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sample_size">Sample size:</label>
+                <input
+                  type="number"
+                  id="sample_size"
+                  name="sample_size"
+                  class="form-control"
+                  min="1"
+                  placeholder="Recommended: 20-35"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="clusters">Number of clusters:</label>
+                <input
+                  type="number"
+                  id="clusters"
+                  name="clusters"
+                  class="form-control"
+                  min="1"
+                  placeholder="Recommended: 2"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="noise">Noise:</label>
+                <input
+                  type="number"
+                  id="noise"
+                  name="noise"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  placeholder="Recommended: 0-0.05"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="length_scale">length_scale(\(\sigma\)):</label>
+                <input
+                  type="number"
+                  id="length_scale"
+                  name="length_scale"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  placeholder="Default: 0.14, optional field for advanced user"
+                />
+              </div>
+              <div
+                class="form-group custom-control custom-checkbox text-center"
+              >
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  id="displayCheck"
+                  name="display_mode"
+                />
+                <label class="custom-control-label" for="displayCheck"
+                  >Check for step-by-step display</label
+                >
+              </div>
+              <div class="form-group text-center">
+                <input type="submit" value="Submit" class="btn-submit" />
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div
-          class="col-lg-6 mx-auto position-fixed d-flex justify-content-center align-items-center flex-column"
-          style="
-            right: 0;
-            top: 0;
-            bottom: 0;
-            overflow: auto;
-            transform: translateY(-5.5%);
-          "
-        >
-          <div class="description" style="padding: 12px; margin-top: 20px">
-            <h3>About the Application</h3>
-            <div class="scrollable-textbox">
-              <p>
-                This is an educational application designed to demonstrate the
-                concept and application of Spectral Clustering, a powerful
-                technique in the field of machine learning and data science.
-                This technique is used to cluster data into relevant groups.
-                Using our user-friendly interface, you can adjust parameters and
-                observe their impact on the clustering process. For optimal
-                visualization, we employ the
-                <a
-                  href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html"
-                  target="_blank"
-                  class="highlight-link"
-                  >make_moons dataset from the sci-kit learn library</a
-                >. The adjustable parameters include the sample size, the number
-                of clusters, and the level of noise in the data. Users can
-                experiment with various parameters to understand how these
-                changes affect the results of the clustering process.
-              </p>
-            </div>
-          </div>
-          <div class="description" style="padding: 12px; margin-top: 15px">
-            <h3 class="linked-header">
+
+      <div class="content-right">
+        <div class="description" style="padding: 12px; margin-top: 20px">
+          <h3>About the Application</h3>
+          <div class="scrollable-textbox">
+            <p>
+              This is an educational application designed to demonstrate the
+              concept and application of Spectral Clustering, a powerful
+              technique in the field of machine learning and data science. This
+              technique is used to cluster data into relevant groups. Using our
+              user-friendly interface, you can adjust parameters and observe
+              their impact on the clustering process. For optimal visualization,
+              we employ the
               <a
-                href="https://proceedings.neurips.cc/paper_files/paper/2001/file/801272ee79cfde7fa5960571fee36b9b-Paper.pdf"
+                href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html"
                 target="_blank"
-                rel="noopener"
-              >
-                Theory: "On Spectral Clustering: Analysis and an algorithm"
-              </a>
-            </h3>
-            <div class="scrollable-textbox">
-              <p>
-                Stanford Professor Andrew Ng's paper on spectral clustering
-                offers deep insights into the mathematical and theoretical
-                foundations of this technique. The paper thoroughly details the
-                algorithmic process, which includes constructing a similarity
-                graph, generating the Laplacian matrix, performing eigen
-                decomposition, and finally, applying k-means clustering on the
-                obtained eigenvectors to produce the clustered dataset. The
-                paper underscores the ability of Spectral Clustering to manage
-                non-convex clusters, a feature that elevates it above
-                traditional methods like K-means for a broad array of
-                applications.
-              </p>
-            </div>
+                class="highlight-link"
+                >make_moons dataset from the sci-kit learn library</a
+              >. The adjustable parameters include the sample size, the number
+              of clusters, and the level of noise in the data. Users can
+              experiment with various parameters to understand how these changes
+              affect the results of the clustering process.
+            </p>
+          </div>
+        </div>
+        <div class="description" style="padding: 12px; margin-top: 15px">
+          <h3 class="linked-header">
+            <a
+              href="https://proceedings.neurips.cc/paper_files/paper/2001/file/801272ee79cfde7fa5960571fee36b9b-Paper.pdf"
+              target="_blank"
+              rel="noopener"
+            >
+              Theory: "On Spectral Clustering: Analysis and an algorithm"
+            </a>
+          </h3>
+          <div class="scrollable-textbox">
+            <p>
+              Stanford Professor Andrew Ng's paper on spectral clustering offers
+              deep insights into the mathematical and theoretical foundations of
+              this technique. The paper thoroughly details the algorithmic
+              process, which includes constructing a similarity graph,
+              generating the Laplacian matrix, performing eigen decomposition,
+              and finally, applying k-means clustering on the obtained
+              eigenvectors to produce the clustered dataset. The paper
+              underscores the ability of Spectral Clustering to manage
+              non-convex clusters, a feature that elevates it above traditional
+              methods like K-means for a broad array of applications.
+            </p>
           </div>
         </div>
       </div>
