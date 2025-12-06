@@ -11,3 +11,5 @@ Windows Run:
 
 Mac do:
 `./MacScript.sh`
+
+https://spectral-app-3d9d74abd45c.herokuapp.com/
